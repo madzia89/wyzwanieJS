@@ -13,3 +13,7 @@ console.log (+true) //returns 1
 console.log(typeof +true) //number because it's 1!
 console.log (+null)//returns 0
 console.log(typeof +null)//returns number because it's 0 !
+console.log([] ===[]) //false
+console.log(Infinity === Infinity)
+console.log(isFinite(Infinity))
+console.log(isFinite(29))
