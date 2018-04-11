@@ -8,6 +8,6 @@ function fakeBin(x){
 
         else if (m[i] < 5){ m[i] = 0}
     }
-    return m
+    return m.innerHTML=m.join("")
 
 }
