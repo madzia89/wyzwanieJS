@@ -1,21 +1,13 @@
 function fakeBin(x){
-    x = x *1
-    var myArray = new Array()
 
-    myArray.push(x)
+    var m = x.split("")
 
-    for (var i = 0; i < myArray.lenght; i++){
+    for (var i = 0; i < m.length; i++){
 
-        if (myArray[i] >= 5){
+        if (m[i] >= 5){ m[i] = 1}
 
-            myArray[i] = 1
-        }
-        else {
-            myArray[i] = 0
-        }
-        return myArray
+        else if (m[i] < 5){ m[i] = 0}
     }
+    return m
 
 }
-
-//nie działa, why!!!???
