@@ -14,6 +14,6 @@ newArr.shift()              //removes first element of an array
 console.log(newArr)
 //[1, 8, 7, 5, 6, 6]
 
-newArr.pop()                //remowes last element of an array
+newArr.pop()                //removes last element of an array
 console.log(newArr)
 //[1, 8, 7, 5, 6]
