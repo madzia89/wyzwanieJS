@@ -5,3 +5,6 @@
     }
 
 // returns the lowest nr in an array
+
+
+
