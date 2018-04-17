@@ -14,4 +14,4 @@ Dog.prototype.speak = function () {
 
 var dog1 = new Dog("Reksio", "woof woof")
 
-//wywołanie speak w kontekście Dof1 = Dog1.speak()
+//wywołanie speak w kontekście Dof1 = Dog1.speak()//
