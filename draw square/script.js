@@ -4,19 +4,22 @@ var square = {          //tworzymy zmienną z obiektem. otwarcie klamerką jest 
     a: 3,               //długość a
     getArea: function (){       //metoda zwracająca powierzchnię kwadratu
         return this.a*this.a    //this oznacza odnoszenie się do obecnego obiektu
-    },
+    },//wywołanie: square.getArea()
+
+
     //metoda zwraca czy punkt jest wewnątrz square a zwrócić true, false
     collide: function(){
         if ((this.x <= point.px) &&
             (this.x + this.a >= point.px) &&
             (this.y >= point.py) &&
             (this.y - this.a < point.py)){
-        console.log("you collide")}
+            console.log("you collide")
+        }
         else {console.log("you don't collide")}
-    }
+    },
             }
 
-//wywołanie: square.getArea()
+
 
 var point = {               //robimy punkt!
     px: 10,
