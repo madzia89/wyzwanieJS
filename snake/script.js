@@ -3,7 +3,12 @@ function Game(containerSelector){
     this.gameContainer = document.querySelector(containerSelector)
     this.boardElement = null
     this.step = 2            //mówi o ile będzie przesunięcie przy ruchu
-    this.snakeArray = [{x: 25, y: 25}]
+    this.snakeArray = [
+        {x: 25, y: 25},
+        {x: 24, y: 25},
+        {x: 23, y: 25},
+        {x: 22, y: 25}
+        ]
      //tablica z pozycją snejka
 }
 
