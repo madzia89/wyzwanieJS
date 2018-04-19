@@ -1,3 +1,9 @@
+//zamykamy ToDoList w samowywołującej się funkcji a pod koniec wywołujemy listę aby trafiła do tej zmiennej
+//dzięki temu zmienne nie są w globalnym skocope
+//a będzie pamiętać zmianne ponieważ jes domknięcie
+var ToDoList = (function(){
+
+
 //zaczynamy od funkcji kkoknstruktora dla odróżnienia nazwę tej funkcji rozpoczynamy dużą literą:
 function Task(description) {
     //każdy obiekt będzie miał te wartości (chociaż inne)
@@ -103,13 +109,17 @@ ToDoList.prototype.renderOneTask = function (task, i) {
 
     //dodajemy inny event na usuwanie taska z listy
     div.addEventListener('dblclick', (function () {
-        this.removeTask(i)
+        this.removeTask(i) //tutaj index jest domknięciem bo odnosi się do góry funkcji??
     }).bind(this))
 
 
     //dołączamy diva do kontenera
     this.container.appendChild(div)
 }
+
+return ToDoList
+
+})()
 
 
 
