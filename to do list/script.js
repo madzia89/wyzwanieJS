@@ -36,64 +36,96 @@ ToDoList.prototype.addTasks = function (description) {
     //do tablicy ododajemy nowy obiekt:
     var task = new Task(description)
     this.tasks = this.tasks.concat([task])
+    this.render()
 }
 
 //funkcja ma nam wylogowywać wszystkie taski:
-ToDoList.prototype.logTasks = function(){
-    this.tasks.forEach(function(task){console.log(task)})
+ToDoList.prototype.logTasks = function () {
+    this.tasks.forEach(function (task) {
+        console.log(task)
+    })
     //lub
     //this.tasks.forEach(console.log)
 }
 
 //remove tasks. Jedyne co bezpośrednio identyfkuje dany task jest jego index w tablicy
-ToDoList.prototype.removeTask = function(indexOfTask){
+ToDoList.prototype.removeTask = function (indexOfTask) {
     //deklarujemy nową tablicę w zmiennej
-    this.tasks = this.tasks.filter(function(el, i){
+    this.tasks = this.tasks.filter(function (el, i) {
         return indexOfTask !== i
     })
+    this.render()
 }
 
-ToDoList.prototype.toggleTask = function (indexOfTask){
-   var task =  this.tasks[indexOfTask].toggleCompleted()
+ToDoList.prototype.toggleTask = function (indexOfTask) {
+    var task = this.tasks[indexOfTask].toggleCompleted()
     //to po to aby zaznaczyć completed tylko jeżeli ten task istnieje tj. nie został usunięty
-    if(task) task.toggleCompleted()
+    if (task) task.toggleCompleted()
+
+    this.render()
 }
 
-ToDoList.prototype.editTask = function (indexOfTask){
+ToDoList.prototype.editTask = function (indexOfTask) {
     //zmiana opisu  taska
     var task = this.tasks[indexOfTask]
     if (task) task.changeDescription(description)
+    this.render()
 }
 
 //piszemy metodę render która podaje aktualny stan ponieważ na górze powiedzielśmy że todolista jest w kontenerze, będziemy ten kontener aktualizować
 
-ToDoList.prototype.render = function (){
+ToDoList.prototype.render = function () {
     //odświeżamy kontener aby był pusty igotowy na zmiany!
     this.container.innerHTML = ''
 
     //najpierw musimy zrobić tyle diwów ile jest tasków czyli dla każdego tasku i jego indeksu tworzymy diva
     this.tasks.forEach(this.renderOneTask.bind(this)) //bind po to aby this.container z dołu odnosił się do kontenera z pierwszego rzędu funkcji
 }
-
-ToDoList.prototype.renderOneTask = function(task, i){
+//render dla jednego taska
+ToDoList.prototype.renderOneTask = function (task, i) {
     //tworzenie diva dla taska
     var div = document.createElement('div')
 
     //do diva dodajemy opis taska
     div.innerHTML = task.description
 
+    //jeżeli task jest wykonany ma być przekreślony
+    if (task.completed) {
+        div.style.textDecoration = 'line-through'
+    }
+
+    //dodajemy eventlisenery aby nasłuchiwały nowych tasków
+    //wpisana poniżej funkcja sięgnie po toggleTask z góry z indeksem klikniętego tasku
+    div.addEventListener('click', (function () {
+        this.toggleTask(i)
+    }).bind(this))
+
+
+    //dodajemy inny event na usuwanie taska z listy
+    div.addEventListener('dblclick', (function () {
+        this.removeTask(i)
+    }).bind(this))
+
+
     //dołączamy diva do kontenera
     this.container.appendChild(div)
 }
 
+
+
 var tasker = new ToDoList()
 tasker.addTasks('zad1')
 tasker.addTasks('zad2')
+tasker.addTasks('zad3')
+tasker.addTasks('zad4')
 tasker.logTasks()
 
 //sposób na usunięcie taska:
 // tasker.removeTask(0)
 // console.log(tasker)
+
+tasker.toggleTask(0) // przekreślenie wykonanego taska
+
 
 //odświeżanie aktualnego stanu
 tasker.render()
