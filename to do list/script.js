@@ -130,5 +130,9 @@ tasker.toggleTask(0) // przekreślenie wykonanego taska
 //odświeżanie aktualnego stanu
 tasker.render()
 
+tasker.addTask('dupa')
+tasker.editTask(3, 'dupa')
+
+
 
 
