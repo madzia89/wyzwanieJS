@@ -23,7 +23,10 @@ Task.prototype.changeDescription = function (newDescription) {
     this.description = newDescription
 }
 
-function ToDoList() {
+function ToDoList(container) {
+    //przekazujemy kontener przy tworzenu todolisty aby miała gdzie się wyświetlać
+    container = container || document.body
+    this.container = container
     //toDoLista powinna zawierać listę tasków, na początku pusta tablica
     this.tasks = []
 }
@@ -62,7 +65,38 @@ ToDoList.prototype.editTask = function (indexOfTask){
     if (task) task.changeDescription(description)
 }
 
+//piszemy metodę render która podaje aktualny stan ponieważ na górze powiedzielśmy że todolista jest w kontenerze, będziemy ten kontener aktualizować
+
+ToDoList.prototype.render = function (){
+    //odświeżamy kontener aby był pusty igotowy na zmiany!
+    this.container.innerHTML = ''
+
+    //najpierw musimy zrobić tyle diwów ile jest tasków czyli dla każdego tasku i jego indeksu tworzymy diva
+    this.tasks.forEach(this.renderOneTask.bind(this)) //bind po to aby this.container z dołu odnosił się do kontenera z pierwszego rzędu funkcji
+}
+
+ToDoList.prototype.renderOneTask = function(task, i){
+    //tworzenie diva dla taska
+    var div = document.createElement('div')
+
+    //do diva dodajemy opis taska
+    div.innerHTML = task.description
+
+    //dołączamy diva do kontenera
+    this.container.appendChild(div)
+}
+
 var tasker = new ToDoList()
 tasker.addTasks('zad1')
 tasker.addTasks('zad2')
 tasker.logTasks()
+
+//sposób na usunięcie taska:
+// tasker.removeTask(0)
+// console.log(tasker)
+
+//odświeżanie aktualnego stanu
+tasker.render()
+
+
+
