@@ -1,15 +1,7 @@
-//email validation
-
-function isEmail(emailToTest) {
-    // check for @
-    var atSymbol = emailToTest.indexOf("@");
-    if (atSymbol < 1) return false;
-
-    var dot = emailToTest.indexOf(".");
-    if (dot <= atSymbol + 2) return false;
-
-    // check that the dot is not at the end
-    if (dot === emailToTest.length - 1) return false;
-
+function validateEmail(str) {
+    if (str.indexOf('@') < 1
+        || str.indexOf('.') < 0
+        || str.indexOf('@') > str.lastIndexOf('.')
+    ) return false;
     return true;
 }
